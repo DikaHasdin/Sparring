@@ -31,11 +31,10 @@
                             <tbody>
                               @forelse ($games as $game)
                                 <tr>
+                                    <td>{{ $game->nama_game }}</td>
                                     <td class="text-center">
-                                        <img src="{{ asset('/storage/games/'.$game->image) }}" class="rounded" style="width: 150px">
+                                        <img src="{{ asset('/storage/games/'.$game->image) }}" class="rounded" style="width: 100px">
                                     </td>
-                                    <td>{{ $game->title }}</td>
-                                    <td>{!! $game->content !!}</td>
                                     <td class="text-center">
                                         <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('games.destroy', $game->id) }}" method="POS-T">
                                             <a href="{{ route('games.show', $game->id) }}" class="btn btn-sm btn-dark">SHOW</a>
