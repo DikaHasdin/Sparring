@@ -19,7 +19,7 @@
                 </div>
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <a href="{{ route('games.create') }}" class="btn btn-md btn-success mb-3">Tambah Game</a>
+                        <a href="{{ route('games.create') }}" class="btn btn-md btn-success mb-3">Tambah game</a>
                         <table class="table table-bordered">
                             <thead>
                               <tr>
