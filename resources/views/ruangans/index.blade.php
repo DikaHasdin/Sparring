@@ -8,7 +8,7 @@
     <title>Data Ruangan - Sparring Game Centre</title>
     <style>
         body {
-            background-color: lightgray !important;
+            background-color: rgb(255, 253, 253) !important;
         }
 
     </style>
@@ -50,5 +50,6 @@
             </div>
         </div>
     </div>
+    @include('components.modal-create')
 </body>
 </html>
