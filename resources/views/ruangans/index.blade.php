@@ -51,5 +51,6 @@
         </div>
     </div>
     @include('components.modal-create')
+    @include('components.modal-edit')
 </body>
 </html>
