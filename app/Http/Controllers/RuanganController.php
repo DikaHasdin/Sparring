@@ -76,4 +76,16 @@ class RuanganController extends Controller
             'data'    => $ruangan  
         ]);
     }
+
+    public function destroy($id)
+    {
+        //delete Ruangan by ID
+        Ruangan::where('id', $id)->delete();
+
+        //return response
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Ruangan Berhasil Dihapus!.',
+        ]); 
+    }
 } 

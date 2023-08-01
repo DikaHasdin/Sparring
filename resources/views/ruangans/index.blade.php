@@ -52,5 +52,6 @@
     </div>
     @include('components.modal-create')
     @include('components.modal-edit')
+    @include('components.modal-delete')
 </body>
 </html>
