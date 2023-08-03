@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::resource('/',\App\Http\Controllers\LoginController::class);
+
+Route::get('/dashboard', function () {
     return view('welcome');
 });
-
 Route::resource('/games',\App\Http\Controllers\GameController::class);
 Route::resource('/ruangans',\App\Http\Controllers\RuanganController::class);
