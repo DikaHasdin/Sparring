@@ -96,7 +96,7 @@
                                                 <span>Profile</span></a>
                                         </li>
                                         <hr class="my-2">
-                                        <li><a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a>
+                                        <li><a href="/logout"><i class="icon-key"></i> <span>Logout</span></a>
                                         </li>
                                     </ul>
                                 </div>

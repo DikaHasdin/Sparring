@@ -54,7 +54,7 @@
                                         </div>
                                     @endif
                                     <div class="form-group">
-                                        <input type="username" name="username" class="form-control"
+                                        <input type="username" name="username" class="form-control" value="{{ Session::get('username') }}"
                                             placeholder="Username">
                                         @error('username')
                                             <div class="alert alert-danger mt-2">
