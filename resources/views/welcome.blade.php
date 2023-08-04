@@ -128,8 +128,8 @@
                             <i class="icon-menu menu-icon"></i><span class="nav-text">Database</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./table-basic.html" aria-expanded="false">Basic Table</a></li>
-                            <li><a href="./table-datatable.html" aria-expanded="false">Data Table</a></li>
+                            <li><a href="/games" aria-expanded="false">Game</a></li>
+                            <li><a href="/ruangans" aria-expanded="false">Ruangan</a></li>
                         </ul>
                     </li>
 
