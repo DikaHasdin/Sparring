@@ -8,7 +8,8 @@
     <title>Quixlab - Bootstrap Admin Dashboard Template by Themefisher.com</title>
     <!-- Favicon icon -->
     <link rel="icon" type="/assets/image/png" sizes="16x16" href="/assets/images/favicon.png">
-    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="/assets/css/style.css" rel="stylesheet">
 
 </head>
@@ -41,21 +42,28 @@
                     <div class="form-input-content">
                         <div class="card login-form mb-0">
                             <div class="card-body pt-5">
+
+                                {{-- <a class="text-center" href="index.html"> <h4>Register</h4></a><br> --}}
                                 <a class="text-center" href="index.html">
                                     {{-- <h4><img src="/assets/images/favicon.png" alt="" width="100" height="50"><br> Login</h4> --}}
-                                    <h4><img src="/assets/images/Login.png" alt="" width="215"
+                                    <h4><img src="/assets/images/Register.png" alt="" width="215"
                                             height="70"></h4>
                                 </a>
-                                <form class="mt-5 mb-5 login-input" action="/login" method="POST">
+
+                                <form class="mt-5 mb-5 login-input">
                                     @csrf
-                                    @if ($message = Session::get('falled'))
-                                        <div class="alert alert-danger mt-2">
-                                            {{ $message }}
-                                        </div>
-                                    @endif
                                     <div class="form-group">
-                                        <input type="username" name="username" class="form-control" value="{{ Session::get('username') }}"
-                                            placeholder="Username">
+                                        <input type="nama" name="nama" class="form-control"
+                                            value="{{ Session::get('nama') }}" placeholder="nama">
+                                        @error('nama')
+                                            <div class="alert alert-danger mt-2">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="username" name="username" class="form-control"
+                                            value="{{ Session::get('username') }}" placeholder="Username">
                                         @error('username')
                                             <div class="alert alert-danger mt-2">
                                                 {{ $message }}
@@ -71,17 +79,28 @@
                                             </div>
                                         @enderror
                                     </div>
+                                    <div class="form-group">
+                                        <input type="jabatan" name="jabatan" class="form-control"
+                                            value="{{ Session::get('jabatan') }}" placeholder="jabatan">
+                                        @error('jabatan')
+                                            <div class="alert alert-danger mt-2">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
                                     <button class="btn login-form__btn submit w-100" name="submit"
-                                        type="submit">Login</button>
+                                        type="submit">Sybmit</button>
                                 </form>
-                                <p class="mt-5 login-form__footer">Dont have account? <a href="/Register"
-                                        class="text-primary">Register</a> now</p>
+                                <p class="mt-5 login-form__footer">Have account <a href="/"
+                                        class="text-primary">Login </a> now</p>
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
 
@@ -95,8 +114,6 @@
     <script src="/assets/js/settings.js"></script>
     <script src="/assets/js/gleek.js"></script>
     <script src="/assets/js/styleSwitcher.js"></script>
-
-
 </body>
 
 </html>

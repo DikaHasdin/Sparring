@@ -20,6 +20,7 @@ Route::resource('/',\App\Http\Controllers\LoginController::class);
 
 Route::post('/login', [LoginController::class, 'Login']);
 Route::get('/logout', [LoginController::class, 'Logout']);
+Route::get('/Register', [LoginController::class, 'Register']);
 
 Route::get('/dashboard', function () {
     return view('welcome');
