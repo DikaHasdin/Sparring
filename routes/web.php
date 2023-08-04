@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::resource('/',\App\Http\Controllers\LoginController::class);
+// Route::get('/', [LoginController::class, 'index']);
+
+Route::post('/login', [LoginController::class, 'Login']);
 
 Route::get('/dashboard', function () {
     return view('welcome');
