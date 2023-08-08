@@ -33,7 +33,7 @@ class GameController extends Controller
         //validate form
         $this->validate($request, [
             'nama_game'     => 'required|min:5',
-            'image'     => 'required|image|mimes:jpeg,jpg,png|max:2048',
+            'image'         => 'required|image|mimes:jpeg,jpg,png|max:2048',
         ]);
 
         //upload image

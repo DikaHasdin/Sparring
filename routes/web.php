@@ -27,3 +27,4 @@ Route::get('/dashboard', function () {
 });
 Route::resource('/games',\App\Http\Controllers\GameController::class);
 Route::resource('/ruangans',\App\Http\Controllers\RuanganController::class); 
+Route::resource('/pakets',\App\Http\Controllers\PaketController::class); 

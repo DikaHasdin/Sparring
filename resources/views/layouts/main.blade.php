@@ -130,6 +130,7 @@
                         <ul aria-expanded="false">
                             <li><a href="/games" aria-expanded="false">Game</a></li>
                             <li><a href="/ruangans" aria-expanded="false">Ruangan</a></li>
+                            <li><a href="/pakets" aria-expanded="false">Paket</a></li>
                         </ul>
                     </li>
 
