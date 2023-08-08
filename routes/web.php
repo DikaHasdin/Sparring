@@ -26,4 +26,4 @@ Route::get('/dashboard', function () {
     return view('welcome');
 });
 Route::resource('/games',\App\Http\Controllers\GameController::class);
-Route::resource('/ruangans',\App\Http\Controllers\RuanganController::class);
+Route::resource('/ruangans',\App\Http\Controllers\RuanganController::class); 

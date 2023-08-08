@@ -159,8 +159,8 @@
                             <li><a href="./chart-peity.html">Peity</a></li>
                         </ul>
                     </li>
-                    
-   
+
+
                 </ul>
             </div>
         </div>
@@ -175,7 +175,9 @@
 
             @yield('container')
             <!-- #/ container -->
+
         </div>
+
         <!--**********************************
             Content body end
         ***********************************-->
@@ -194,6 +196,7 @@
             Footer end
         ***********************************-->
     </div>
+    
     <!--**********************************
         Main wrapper end
     ***********************************-->
@@ -206,11 +209,14 @@
     <script src="/assets/js/settings.js"></script>
     <script src="/assets/js/gleek.js"></script>
     <script src="/assets/js/styleSwitcher.js"></script>
-
+      
     <script src="/assets/plugins/tables/js/jquery.dataTables.min.js"></script>
     <script src="/assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
     <script src="/assets/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
-
+    
 </body>
 
 </html>
+@include('ruangans.modal-create')
+@include('ruangans.modal-edit')
+@include('ruangans.modal-delete')

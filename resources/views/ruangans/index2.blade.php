@@ -16,30 +16,8 @@
 
 <body>
 
-    <!--*******************
-        Preloader start
-    ********************-->
-    <div id="preloader">
-        <div class="loader">
-            <svg class="circular" viewBox="25 25 50 50">
-                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3"
-                    stroke-miterlimit="10" />
-            </svg>
-        </div>
-    </div>
-    <!--*******************
-        Preloader end
-    ********************-->
-
-
-    <!--**********************************
-        Main wrapper start
-    ***********************************-->
     <div id="main-wrapper">
 
-        <!--**********************************
-            Nav header start
-        ***********************************-->
         <div class="nav-header">
             {{-- <div class="brand-logo"> --}}
             <a href="/">
@@ -51,13 +29,7 @@
             </a>
             {{-- </div> --}}
         </div>
-        <!--**********************************
-            Nav header end
-        ***********************************-->
 
-        <!--**********************************
-            Header start
-        ***********************************-->
         <div class="header">
             <div class="header-content clearfix">
 
@@ -106,13 +78,7 @@
                 </div>
             </div>
         </div>
-        <!--**********************************
-            Header end ti-comment-alt
-        ***********************************-->
 
-        <!--**********************************
-            Sidebar start
-        ***********************************-->
         <div class="nk-sidebar">
             <div class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
@@ -159,101 +125,93 @@
                             <li><a href="./chart-peity.html">Peity</a></li>
                         </ul>
                     </li>
-                    
-   
+
+
                 </ul>
             </div>
         </div>
-        <!--**********************************
-            Sidebar end
-        ***********************************-->
 
-        <!--**********************************
-            Content body start
-        ***********************************-->
         <div class="content-body">
-
-            <div class="container-fluid mt-3">
+            <div class="container" style="margin-top: 50px">
                 <div class="row">
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card gradient-1">
+                    <div class="col-md-12">
+                        <h4 class="text-center">Data Ruangan</h4>
+                        <div class="card border-0 shadow-sm rounded-md mt-4">
                             <div class="card-body">
-                                <h3 class="card-title text-white">Products Sold</h3>
-                                <div class="d-inline-block">
-                                    <h2 class="text-white">4565</h2>
-                                    <p class="text-white mb-0">Jan - March 2019</p>
-                                </div>
-                                <span class="float-right display-5 opacity-5"><i
-                                        class="fa fa-shopping-cart"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card gradient-2">
-                            <div class="card-body">
-                                <h3 class="card-title text-white">Net Profit</h3>
-                                <div class="d-inline-block">
-                                    <h2 class="text-white">$ 8541</h2>
-                                    <p class="text-white mb-0">Jan - March 2019</p>
-                                </div>
-                                <span class="float-right display-5 opacity-5"><i class="fa fa-money"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card gradient-3">
-                            <div class="card-body">
-                                <h3 class="card-title text-white">New Customers</h3>
-                                <div class="d-inline-block">
-                                    <h2 class="text-white">4565</h2>
-                                    <p class="text-white mb-0">Jan - March 2019</p>
-                                </div>
-                                <span class="float-right display-5 opacity-5"><i class="fa fa-users"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card gradient-4">
-                            <div class="card-body">
-                                <h3 class="card-title text-white">Customer Satisfaction</h3>
-                                <div class="d-inline-block">
-                                    <h2 class="text-white">99%</h2>
-                                    <p class="text-white mb-0">Jan - March 2019</p>
-                                </div>
-                                <span class="float-right display-5 opacity-5"><i class="fa fa-heart"></i></span>
+
+                                <a href="javascript:void(0)" class="btn btn-success mb-2"
+                                    id="btn-create-ruangan">TAMBAH</a>
+
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Nama Ruangan</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table-ruangans">
+                                        @foreach ($ruangans as $ruangan)
+                                            <tr id="index_{{ $ruangan->id }}">
+                                                <td>{{ $ruangan->nama_ruangan }}</td>
+                                                <td class="text-center">
+                                                    <a href="javascript:void(0)" id="btn-edit-ruangan"
+                                                        data-id="{{ $ruangan->id }}"
+                                                        class="btn btn-primary btn-sm">EDIT</a>
+                                                    <a href="javascript:void(0)" id="btn-delete-ruangan"
+                                                        data-id="{{ $ruangan->id }}"
+                                                        class="btn btn-danger btn-sm">DELETE</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
-            <!-- #/ container -->
         </div>
-        <!--**********************************
-            Content body end
-        ***********************************-->
 
+        <!-- Modal -->
+        <div class="modal fade" id="modal-create" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Tambah Ruangan</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
 
-        <!--**********************************
-            Footer start
-        ***********************************-->
+                        <div class="form-group">
+                            <label for="name" class="control-label">Nama Ruangan</label>
+                            <input type="text" class="form-control" id="nama_ruangan">
+                            <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-nama_ruangan"></div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">TUTUP</button>
+                        <button type="button" class="btn btn-primary" id="store">SIMPAN</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="footer">
             <div class="copyright">
                 <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a>
                     2018</p>
             </div>
         </div>
-        <!--**********************************
-            Footer end
-        ***********************************-->
-    </div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
 
-    <!--**********************************
-        Scripts
-    ***********************************-->
+    </div>
+    {{-- @include('ruangans.modal-create') --}}
+    @include('ruangans.modal-edit')
+    @include('ruangans.modal-delete')
+
     <script src="/assets/plugins/common/common.min.js"></script>
     <script src="/assets/js/custom.min.js"></script>
     <script src="/assets/js/settings.js"></script>
@@ -263,6 +221,105 @@
     <script src="/assets/plugins/tables/js/jquery.dataTables.min.js"></script>
     <script src="/assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
     <script src="/assets/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+
+
+
+    <script>
+        //button create ruangan event
+        $('body').on('click', '#btn-create-ruangan', function() {
+
+            //open modal
+            $('#modal-create').modal('show');
+        });
+
+       
+        //action create ruangan
+        
+        $('#store').click(function(e) {
+            e.preventDefault();
+
+            //define variable
+            let nama_ruangan = $('#nama_ruangan').val();
+            let token = $("meta[name='csrf-token']").attr("content");
+
+            //ajax
+            $.ajax({
+
+                url: `/ruangans`,
+                type: "POST",
+                cache: false,
+                data: {
+                    "nama_ruangan": nama_ruangan,
+                    "_token": token
+                },
+                success: function(response) {
+
+                    //show success message
+                    Swal.fire({
+                        type: 'success',
+                        icon: 'success',
+                        nama_ruangan: `${response.message}`,
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+
+                    //data ruangan
+                    let ruangan = `
+                    <tr id="index_${response.data.id}">
+                        <td>${response.data.nama_ruangan}</td>
+                        <td class="text-center">
+                            <a href="javascript:void(0)" id="btn-edit-ruangan" data-id="${response.data.id}" class="btn btn-primary btn-sm">EDIT</a>
+                            <a href="javascript:void(0)" id="btn-delete-ruangan" data-id="${response.data.id}" class="btn btn-danger btn-sm">DELETE</a>
+                        </td>
+                    </tr>
+                `;
+
+                    //append to table
+                    $('#table-ruangans').prepend(ruangan);
+
+                    //clear form
+                    $('#nama_ruangan').val('');
+                    $('#content').val('');
+
+                    //close modal
+                    $('#modal-create').modal('hide');
+
+
+                },
+                error: function(error) {
+
+                    if (error.responseJSON.nama_ruangan[0]) {
+
+                        //show alert
+                        $('#alert-nama_ruangan').removeClass('d-none');
+                        $('#alert-nama_ruangan').addClass('d-block');
+
+                        //add message to alert
+                        $('#alert-nama_ruangan').html(error.responseJSON.nama_ruangan[0]);
+                    }
+
+                    // if(error.responseJSON.content[0]) {
+
+                    //     //show alert
+                    //     $('#alert-content').removeClass('d-none');
+                    //     $('#alert-content').addClass('d-block');
+
+                    //     //add message to alert
+                    //     $('#alert-content').html(error.responseJSON.content[0]);
+                    // } 
+
+                }
+
+            });
+
+        });
+        
+    </script>
+    <script>
+         $('#store2').click(function{
+            console.log("Hello world!");
+        });
+    </script>
 
 </body>
 

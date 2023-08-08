@@ -14,7 +14,7 @@ class RuanganController extends Controller
         $ruangans = Ruangan::latest()->get();
 
         //return view with data
-        return view('ruangans.index', compact('ruangans'));
+        return view('ruangans.index3', compact('ruangans'));
     }
 
     public function store(Request $request)
