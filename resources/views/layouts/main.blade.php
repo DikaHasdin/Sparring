@@ -131,6 +131,7 @@
                             <li><a href="/games" aria-expanded="false">Game</a></li>
                             <li><a href="/ruangans" aria-expanded="false">Ruangan</a></li>
                             <li><a href="/pakets" aria-expanded="false">Paket</a></li>
+                            <li><a href="/menus" aria-expanded="false">Menu</a></li>
                         </ul>
                     </li>
 
@@ -215,9 +216,9 @@
     <script src="/assets/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
     <script src="/assets/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
     
+    @include('ruangans.modal-create')
+    @include('ruangans.modal-edit')
+    @include('ruangans.modal-delete')
 </body>
 
 </html>
-@include('ruangans.modal-create')
-@include('ruangans.modal-edit')
-@include('ruangans.modal-delete')
