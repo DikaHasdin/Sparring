@@ -117,7 +117,7 @@
             <div class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
                     <li>
-                        <a href="/" aria-expanded="false">
+                        <a href="/dashboard" aria-expanded="false">
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
                         </a>
                     </li>
@@ -140,11 +140,7 @@
                             <i class="icon-note menu-icon"></i><span class="nav-text">Transaksi</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./form-basic.html">Basic Form</a></li>
-                            <li><a href="./form-validation.html">Form Validation</a></li>
-                            <li><a href="./form-step.html">Step Form</a></li>
-                            <li><a href="./form-editor.html">Editor</a></li>
-                            <li><a href="./form-picker.html">Picker</a></li>
+                            <li><a href="/transaksis">Transaksi</a></li>
                         </ul>
                     </li>
 
