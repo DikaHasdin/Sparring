@@ -28,6 +28,11 @@
                             @endforelse
 
                             <div class="form-group">
+                                <label class="font-weight-bold">TANGGAL</label>
+                                <input type="text" class="form-control" name="tgl_transaksi" value="<?= date('Y-m-d') ?>" readonly>
+                            </div>
+
+                            <div class="form-group">
                                 <label class="font-weight-bold">RUANGAN</label>
                                 <select class="form-control" name="id_ruangan">
                                     <option value="" selected disabled>Pilih Ruangan</option>
@@ -158,7 +163,8 @@
                             <div class="form-group">
                                 <label class="font-weight-bold">JUMLAH JAM</label>
                                 <input type="text" class="form-control @error('jumlah_jam') is-invalid @enderror"
-                                    name="jumlah_jam" value="{{ old('jumlah_jam') }}" placeholder="Masukkan Jumlah Jam Mulai">
+                                    name="jumlah_jam" value="{{ old('jumlah_jam') }}"
+                                    placeholder="Masukkan Jumlah Jam Mulai">
 
                                 <!-- error message untuk jumlah_jam -->
                                 @error('jumlah_jam')
