@@ -50,7 +50,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">RUANGAN</label>
                                 <div class="col-sm-9">
-                                    <select class="form-control" name="id_ruangan">
+                                    <select class="form-control" name="id_ruangan" required>
                                         <option value="" selected disabled>Pilih Ruangan</option>
                                         <?php foreach ($data_ruanagn as $ruangan) : ?>
                                         <option value="<?= $ruangan['id'] ?>"><?= $ruangan['nama_ruangan'] ?></option>
@@ -68,7 +68,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">PAKET</label>
                                 <div class="col-sm-9">
-                                    <select class="form-control" name="id_paket">
+                                    <select class="form-control" name="id_paket" required>
                                         <option value="" selected disabled>Pilih Paket</option>
                                         <?php foreach ($data_paket as $paket) : ?>
                                         <option value="<?= $paket['id'] ?>"><?= $paket['nama_paket'] ?></option>
@@ -87,7 +87,7 @@
                                 <label class="col-sm-3 col-form-label">JAM MULAI</label>
                                 <div class="col-sm-2">
                                     <input type="time" class="form-control @error('jam_mulai') is-invalid @enderror"
-                                        id="jam_mulai" name="jam_mulai">
+                                        id="jam_mulai" name="jam_mulai" required>
                                     <!-- error message untuk jam_mulai -->
                                     @error('jam_mulai')
                                         <div class="alert alert-danger mt-2">
@@ -102,7 +102,7 @@
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control @error('jumlah_jam') is-invalid @enderror"
                                         name="jumlah_jam" value="{{ old('jumlah_jam') }}"
-                                        placeholder="Masukkan Jumlah Jam Mulai">
+                                        placeholder="Masukkan Jumlah Jam Mulai" required>
 
                                     <!-- error message untuk jumlah_jam -->
                                     @error('jumlah_jam')

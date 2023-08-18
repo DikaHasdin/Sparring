@@ -15,7 +15,13 @@ class TransaksiController extends Controller
 {
     public function index()
     {
-        $transaksis = Transaksi::latest()->paginate(5);
+        // $transaksis = Transaksi::latest()->paginate(5);
+        $transaksis = DB::table('transaksis')
+            ->join('ruangans', 'transaksis.ruangan_id', '=', 'ruangans.id')
+            ->join('pelanggans', 'transaksis.pelanggan_id', '=', 'pelanggans.id')
+            ->select('transaksis.*', 'ruangans.nama_ruangan', 'pelanggans.nama_pelanggan')
+            ->get();
+
         return view('transaksi.index', compact('transaksis'));
     }
 

@@ -24,9 +24,9 @@
                                     @forelse ($transaksis as $transaksi)
                                         <tr>
                                             <td>{{ $transaksi->id }}</td>
-                                            <td>-</td>
+                                            <td>{{ $transaksi->nama_pelanggan }}</td>
                                             <td>{{ $transaksi->tgl_transaksi }}</td>
-                                            <td>-</td>
+                                            <td>{{ $transaksi->nama_ruangan }}</td>
                                             <td>{{ $transaksi->status_transaksi }}</td>
                                             <td class="text-center">
                                                 {{-- <form onsubmit="return confirm('Apakah Anda Yakin ?');"
@@ -73,9 +73,9 @@
                                     @forelse ($transaksis as $transaksi)
                                         <tr>
                                             <td>{{ $transaksi->id }}</td>
-                                            <td>-</td>
+                                            <td>{{ $transaksi->nama_pelanggan }}</td>
                                             <td>{{ $transaksi->tgl_transaksi }}</td>
-                                            <td>-</td>
+                                            <td>{{ $transaksi->nama_ruangan }}</td>
                                             <td>{{ $transaksi->status_transaksi }}</td>
                                             <td class="text-center">
                                                 {{-- <form onsubmit="return confirm('Apakah Anda Yakin ?');"
