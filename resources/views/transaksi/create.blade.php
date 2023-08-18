@@ -7,11 +7,18 @@
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
                         <h4 class="card-title mb-5">FORM BOOKING MEMBER</h4>
-                        <form action="{{ route('menus.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="/transaksis/select_member" method="POST" enctype="multipart/form-data">
 
                             @csrf
 
                             @forelse ($data as $pelanggan)
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">ID PELANGGAN</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="pelanggan_id"
+                                            value="{{ $pelanggan->id }}" readonly>
+                                    </div>
+                                </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">NAMA PELANGGAN</label>
                                     <div class="col-sm-9">
@@ -79,112 +86,16 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">JAM MULAI</label>
                                 <div class="col-sm-2">
-                                    <input type="time" class="form-control @error('jumlah_jam') is-invalid @enderror"
-                                        id="appt" name="appt">
-                                    <!-- error message untuk jumlah_jam -->
-                                    @error('jumlah_jam')
+                                    <input type="time" class="form-control @error('jam_mulai') is-invalid @enderror"
+                                        id="jam_mulai" name="jam_mulai">
+                                    <!-- error message untuk jam_mulai -->
+                                    @error('jam_mulai')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
                                         </div>
                                     @enderror
                                 </div>
                             </div>
-
-                            {{-- <label class="col-sm-3 col-form-label">JAM MULAI</label>
-                            <div class="form-row">
-                                <div class="col">
-                                    <select class="custom-select mr-sm-2" id="jam">
-                                        <option selected="selected">Pilih Jam</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                        <option>10</option>
-                                        <option>11</option>
-                                        <option>11</option>
-                                        <option>12</option>
-                                        <option>13</option>
-                                        <option>14</option>
-                                        <option>15</option>
-                                        <option>16</option>
-                                        <option>17</option>
-                                        <option>18</option>
-                                        <option>19</option>
-                                        <option>20</option>
-                                        <option>21</option>
-                                        <option>22</option>
-                                        <option>23</option>
-                                        <option>24</option>
-                                    </select>
-                                </div>
-                                <div class="col">
-                                    <select class="custom-select mr-sm-2" id="jam">
-                                        <option selected="selected">Pilih Menit</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                        <option>6</option>
-                                        <option>7</option>
-                                        <option>8</option>
-                                        <option>9</option>
-                                        <option>10</option>
-                                        <option>11</option>
-                                        <option>11</option>
-                                        <option>12</option>
-                                        <option>13</option>
-                                        <option>14</option>
-                                        <option>15</option>
-                                        <option>16</option>
-                                        <option>17</option>
-                                        <option>18</option>
-                                        <option>19</option>
-                                        <option>20</option>
-                                        <option>21</option>
-                                        <option>22</option>
-                                        <option>23</option>
-                                        <option>24</option>
-                                        <option>25</option>
-                                        <option>26</option>
-                                        <option>27</option>
-                                        <option>28</option>
-                                        <option>29</option>
-                                        <option>30</option>
-                                        <option>31</option>
-                                        <option>32</option>
-                                        <option>33</option>
-                                        <option>34</option>
-                                        <option>35</option>
-                                        <option>36</option>
-                                        <option>37</option>
-                                        <option>38</option>
-                                        <option>39</option>
-                                        <option>40</option>
-                                        <option>41</option>
-                                        <option>42</option>
-                                        <option>43</option>
-                                        <option>44</option>
-                                        <option>45</option>
-                                        <option>46</option>
-                                        <option>47</option>
-                                        <option>48</option>
-                                        <option>49</option>
-                                        <option>50</option>
-                                        <option>51</option>
-                                        <option>52</option>
-                                        <option>53</option>
-                                        <option>54</option>
-                                        <option>55</option>
-                                        <option>56</option>
-                                        <option>57</option>
-                                        <option>58</option>
-                                        <option>59</option>
-                                        <option>60</option>
-                                    </select>
-                                </div>
-                            </div><br> --}}
 
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">JUMLAH JAM</label>

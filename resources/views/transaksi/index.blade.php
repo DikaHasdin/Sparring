@@ -29,17 +29,17 @@
                                             <td>-</td>
                                             <td>{{ $transaksi->status_transaksi }}</td>
                                             <td class="text-center">
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                                {{-- <form onsubmit="return confirm('Apakah Anda Yakin ?');"
                                                     action="{{ route('transaksis.destroy', $transaksi->id) }}"
-                                                    method="POST">
+                                                    method="POST"> --}}
                                                     {{-- <a href="{{ route('transaksis.show', $transaksi->id) }}"
                                                     class="btn btn-sm btn-dark">SHOW</a> --}}
-                                                    <a href="{{ route('transaksis.edit', $transaksi->id) }}"
+                                                    {{-- <a href="{{ route('transaksis.edit', $transaksi->id) }}"
                                                         class="badge badge-primary px-2">EDIT</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="badge badge-danger px-2">HAPUS</button>
-                                                    <a href=""></a>
+                                                    <a href=""></a> --}}
                                                 </form>
                                             </td>
                                         </tr>
@@ -78,17 +78,17 @@
                                             <td>-</td>
                                             <td>{{ $transaksi->status_transaksi }}</td>
                                             <td class="text-center">
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                                {{-- <form onsubmit="return confirm('Apakah Anda Yakin ?');"
                                                     action="{{ route('transaksis.destroy', $transaksi->id) }}"
-                                                    method="POST">
+                                                    method="POST"> --}}
                                                     {{-- <a href="{{ route('transaksis.show', $transaksi->id) }}"
                                                     class="btn btn-sm btn-dark">SHOW</a> --}}
-                                                    <a href="{{ route('transaksis.edit', $transaksi->id) }}"
+                                                    {{-- <a href="{{ route('transaksis.edit', $transaksi->id) }}"
                                                         class="badge badge-primary px-2">EDIT</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="badge badge-danger px-2">HAPUS</button>
-                                                    <a href=""></a>
+                                                    <a href=""></a> --}}
                                                 </form>
                                             </td>
                                         </tr>
