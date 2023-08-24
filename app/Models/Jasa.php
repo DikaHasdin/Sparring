@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Jasa extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'jumlah',
+        'paket_id',
+        'transaksi_id',
+    ];
 }

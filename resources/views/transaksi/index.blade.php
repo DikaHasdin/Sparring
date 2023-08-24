@@ -8,7 +8,7 @@
                     <div class="card-body">
                         <h4 class="card-title">DATA TRANSAKSI BERLANGSUNG</h4>
                         <div class="table-responsive">
-                            <a href="{{ '/transaksis/create' }}" class="badge badge-success px-3">TAMBAH TRANSAKSI</a>
+                            <a href="{{ '/transaksi/create' }}" class="badge badge-success px-3">TAMBAH TRANSAKSI</a>
                             {{-- <a href="{{ route('transaksis.create') }}" class="badge badge-success px-3">TAMBAH TRANSAKSI</a> --}}
                             <table class="table table-striped table-bordered zero-configuration">
                                 <thead>

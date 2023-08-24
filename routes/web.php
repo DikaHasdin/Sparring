@@ -35,7 +35,7 @@ Route::resource('/menus',\App\Http\Controllers\MenuController::class);
 
 Route::get('/transaksis', [TransaksiController::class, 'index']);
 Route::get('/transaksis/{id}', [TransaksiController::class, 'show']);
-Route::get('/transaksis/create', [TransaksiController::class, 'create']);
+Route::get('/transaksi/create', [TransaksiController::class, 'create']);
 Route::post('/transaksis/cek_nomor', [TransaksiController::class, 'cek_nomor']);
 Route::post('/transaksis/select_member', [TransaksiController::class, 'select_member']);
 Route::post('/transaksis/select_nonmember', [TransaksiController::class, 'select_nonmember']);
