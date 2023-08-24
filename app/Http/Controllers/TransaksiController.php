@@ -143,6 +143,7 @@ class TransaksiController extends Controller
         // $data_pelanggan = DB::table('pemesanans')->where('id', max('id'))->get();
         // $data_pemesanan = DB::select(DB::raw('select * from pemesanans where id = (select max(`id`) from pemesanans)'));
         $pemesanan_id = DB::table('pemesanans')->max('id');
+        $transaksi_id = DB::table('transaksis')->max('id');
         // return $pemesanan_id+1;
         // return $request->jam_mulai;
 
@@ -172,6 +173,12 @@ class TransaksiController extends Controller
             'ruangan_id'        => $request->id_ruangan,
             'pelanggan_id'      => $request->pelanggan_id,
             'pemesanan_id'      => $pemesanan_id + 1,
+        ]);
+
+        Jasa::create([
+            'jumlah'            => 1,
+            'paket_id'          => $request->id_paket,
+            'transaksi_id'      => $transaksi_id + 1,
         ]);
 
         $jumlah_jam = -1 * $request->jumlah_jam;
