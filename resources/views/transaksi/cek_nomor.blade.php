@@ -4,10 +4,11 @@
 
     <div class="container mt-5 mb-5">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12"> 
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
                         <form action="/transaksis/cek_nomor" method="POST" enctype="multipart/form-data">
+                        {{-- <form action="{{ route('transaksis.cek_nomor') }}" method="POST" enctype="multipart/form-data"> --}}
                         
                             @csrf
 

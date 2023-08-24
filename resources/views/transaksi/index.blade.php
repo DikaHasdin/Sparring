@@ -8,7 +8,8 @@
                     <div class="card-body">
                         <h4 class="card-title">DATA TRANSAKSI BERLANGSUNG</h4>
                         <div class="table-responsive">
-                            <a href="{{ ('/transaksis/create') }}" class="badge badge-success px-3">TAMBAH TRANSAKSI</a>
+                            <a href="{{ '/transaksis/create' }}" class="badge badge-success px-3">TAMBAH TRANSAKSI</a>
+                            {{-- <a href="{{ route('transaksis.create') }}" class="badge badge-success px-3">TAMBAH TRANSAKSI</a> --}}
                             <table class="table table-striped table-bordered zero-configuration">
                                 <thead>
                                     <tr>
@@ -22,6 +23,7 @@
                                 </thead>
                                 <tbody>
                                     @forelse ($transaksis as $transaksi)
+                                        <?php if($transaksi->status_transaksi == "Main"){ ?>
                                         <tr>
                                             <td>{{ $transaksi->id }}</td>
                                             <td>{{ $transaksi->nama_pelanggan }}</td>
@@ -32,9 +34,8 @@
                                                 {{-- <form onsubmit="return confirm('Apakah Anda Yakin ?');"
                                                     action="{{ route('transaksis.destroy', $transaksi->id) }}"
                                                     method="POST"> --}}
-                                                    {{-- <a href="{{ route('transaksis.show', $transaksi->id) }}"
-                                                    class="btn btn-sm btn-dark">SHOW</a> --}}
-                                                    {{-- <a href="{{ route('transaksis.edit', $transaksi->id) }}"
+                                                <a href="/transaksis/{{ $transaksi->id }}" class="btn btn-sm btn-dark">SHOW</a>
+                                                {{-- <a href="{{ route('transaksis.edit', $transaksi->id) }}"
                                                         class="badge badge-primary px-2">EDIT</a>
                                                     @csrf
                                                     @method('DELETE')
@@ -43,6 +44,7 @@
                                                 </form>
                                             </td>
                                         </tr>
+                                        <?php } ?>
                                     @empty
                                         <div class="alert alert-danger">
                                             Data transaksi Belum Tersedia.
@@ -71,6 +73,7 @@
                                 </thead>
                                 <tbody>
                                     @forelse ($transaksis as $transaksi)
+                                        <?php if($transaksi->status_transaksi == "Selesai"){ ?>
                                         <tr>
                                             <td>{{ $transaksi->id }}</td>
                                             <td>{{ $transaksi->nama_pelanggan }}</td>
@@ -81,9 +84,9 @@
                                                 {{-- <form onsubmit="return confirm('Apakah Anda Yakin ?');"
                                                     action="{{ route('transaksis.destroy', $transaksi->id) }}"
                                                     method="POST"> --}}
-                                                    {{-- <a href="{{ route('transaksis.show', $transaksi->id) }}"
+                                                {{-- <a href="{{ route('transaksis.show', $transaksi->id) }}"
                                                     class="btn btn-sm btn-dark">SHOW</a> --}}
-                                                    {{-- <a href="{{ route('transaksis.edit', $transaksi->id) }}"
+                                                {{-- <a href="{{ route('transaksis.edit', $transaksi->id) }}"
                                                         class="badge badge-primary px-2">EDIT</a>
                                                     @csrf
                                                     @method('DELETE')
@@ -92,6 +95,7 @@
                                                 </form>
                                             </td>
                                         </tr>
+                                        <?php } ?>
                                     @empty
                                         <div class="alert alert-danger">
                                             Data transaksi Belum Tersedia.

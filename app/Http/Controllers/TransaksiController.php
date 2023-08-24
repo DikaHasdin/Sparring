@@ -10,6 +10,7 @@ use App\Models\Transaksi;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\RedirectResponse;
 
 class TransaksiController extends Controller
 {
@@ -45,13 +46,17 @@ class TransaksiController extends Controller
             $data_paket = Paket::all();
             return view('transaksi.create', compact('data', 'data_ruanagn', 'data_paket'));
         } else {
-            return "Data Tidak Ada";
+            $data_ruanagn = Ruangan::all();
+            $data_paket = Paket::all();
+            $pelanggan_id = DB::table('pelanggans')->max('id');
+            $nomor_telpon = $request->no_tlp;
+            return view('transaksi.createnonmemeber', compact('data_ruanagn', 'data_paket', 'pelanggan_id', 'nomor_telpon'));
         }
 
         return "Error";
     }
 
-    public function select_member(Request $request)
+    public function select_member(Request $request): RedirectResponse
     {
         $this->validate($request, [
             'jam_mulai' => 'required',
@@ -86,5 +91,54 @@ class TransaksiController extends Controller
         ]);
 
         return redirect('/transaksis')->with(['success' => 'Data Berhasil Disimpan']);
+    }
+    
+    public function select_nonmember(Request $request): RedirectResponse
+    {
+        $this->validate($request, [
+            'jam_mulai' => 'required',
+            'jumlah_jam' => 'required|integer',
+        ]);
+        // $data_pelanggan = DB::table('pemesanans')->where('id', max('id'))->get();
+        // $data_pemesanan = DB::select(DB::raw('select * from pemesanans where id = (select max(`id`) from pemesanans)'));
+        $pemesanan_id = DB::table('pemesanans')->max('id');
+        // return $pemesanan_id+1;
+        // return $request->jam_mulai;
+
+        Pelanggan::create([
+            'id'                => $request->pelanggan_id,
+            'nama_pelanggan'    => $request->nama_pelanggan,
+            'no_tlp'            => $request->no_tlp,
+        ]);
+
+        Pemesanan::create([
+            'id'                => $pemesanan_id + 1,
+            'tgl_pemesanan'     => $request->tgl_transaksi,
+            'jam_mulai'         => $request->jam_mulai,
+            'jumlah_jam'        => $request->jumlah_jam,
+            'keterangan'        => "-",
+            'status_pemesanan'  => "Pesan Ditempat",
+            'ruangan_id'        => $request->id_ruangan,
+            'paket_id'          => $request->id_paket,
+            'pelanggan_id'      => $request->pelanggan_id,
+        ]);
+
+        Transaksi::create([
+            'tgl_transaksi'     => $request->tgl_transaksi,
+            'tot_jasa'          => 0,
+            'tot_penjualan'     => 0,
+            'status_transaksi'  => "Main",
+            'ruangan_id'        => $request->id_ruangan,
+            'pelanggan_id'      => $request->pelanggan_id,
+            'pemesanan_id'      => $pemesanan_id + 1,
+        ]);
+
+        return redirect('/transaksis')->with(['success' => 'Data Berhasil Disimpan']);
+    }
+
+    public function show(string $id): View
+    {
+        $paket = Paket::findOrFail($id);
+        return view('pakets.edit', compact('paket'));
     }
 }
