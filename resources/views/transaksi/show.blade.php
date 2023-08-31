@@ -9,25 +9,31 @@
                         <h4 class="card-title">RINCIAN TRANSAKSI</h4>
                         <div class="table-responsive">
                             <table class="mb-2">
-                                <tr>
-                                    <th>Pelanggan</th>
-                                    <th>: Dika </th>
-                                    <th> | Tanggal</th>
-                                    <th>: 01/12/2023</th>
-                                </tr>
-                                <tr>
-                                    <th>Ruangan</th>
-                                    <th>: Room 1</th>
-                                    <th> | Jumlah Jam</th>
-                                    <th>: 2 Jam</th>
-                                </tr>
-                                <tr>
-                                    <th>Jam Mulai</th>
-                                    <th>: 12:00</th>
-                                    <th> | Jam Selesai</th>
-                                    <th>: 14:00</th>
-                                </tr>
-                                <tr>
+                                @foreach ($transaksis as $transaksi)
+                                    <tr>
+                                        <th>Pelanggan</th>
+                                        <th>: {{ $transaksi->nama_pelanggan }} </th>
+                                        <th> | Tanggal</th>
+                                        <th>: {{ $transaksi->tgl_transaksi }}</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Ruangan</th>
+                                        <th>: {{ $transaksi->nama_ruangan }}</th>
+                                        <th> | Jumlah Jam</th>
+                                        <th>: {{ $transaksi->jumlah_jam }} Jam</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Jam Mulai</th>
+                                        <th>: {{ date('H:i', strtotime($transaksi->jam_mulai)) }}</th>
+                                        {{-- <th> | Jam Selesai</th>
+                                        <th>: {{ date('H:i', strtotime($transaksi->jam_selesai)) }}</th> --}}
+                                    </tr>
+                                    <tr>
+                                        {{-- @empty
+                                        <div class="alert alert-danger">
+                                            Data transaksi Belum Tersedia.
+                                        </div> --}}
+                                @endforeach
                             </table>
 
                             </tr>
@@ -41,7 +47,38 @@
                                         <th style="text-align:center" scope="col">AKSI</th>
                                     </tr>
                                 </thead>
-
+                                <tbody>
+                                    <?php $total=0; ?>
+                                    @foreach ($item as $item)
+                                        <tr>
+                                            <td class="text-center">{{ $item->nama_paket }}</td>
+                                            <td class="text-center">{{ $item->jumlah }}</td>
+                                            <td class="text-center">{{ $item->harga_paket }}</td>
+                                            <td class="text-center">{{ $item->jumlah * $item->harga_paket }}</td>
+                                            <?php $total=$total+($item->jumlah * $item->harga_paket) ?>
+                                            <td class="text-center">
+                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                                    action="/transaksis/hapus_item/{{ $id }}/{{ $item->paket_id }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="badge badge-danger px-2">HAPUS</button>
+                                                    <a href=""></a>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        {{-- @empty
+                                        <div class="alert alert-danger">
+                                            Data transaksi Belum Tersedia.
+                                        </div> --}}
+                                    @endforeach
+                                    <tr>
+                                        <td class="text-center" colspan="3">TOTAL</td>
+                                        <td class="text-center">{{ $total }}</td>
+                                        <td class="text-center">
+                                            <a href="/transaksis/save_transaksi/{{ $id }}/{{ $total }}/{{ $transaksi->tgl_transaksi }}" class="badge badge-primary px-3">SAVE</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
                             </table>
                             {{-- {{ $transaksis->links() }} --}}
                         </div>
@@ -61,16 +98,49 @@
                             <div class="tab-content">
                                 <div class="tab-pane fade show active" id="home" role="tabpanel">
                                     <div class="p-t-15">
-                                        <h4>This is home title</h4>
-                                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
-                                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
+                                        <table class="table table-striped table-bordered zero-configuration">
+                                            <tbody>
+                                                @forelse ($paket as $paket)
+                                                    <tr>
+                                                        <td class="text-center">{{ $paket->nama_paket }}</td>
+                                                        <td class="text-center">{{ $paket->jumlah_jam }} Jam</td>
+                                                        <td class="text-center">{{ $paket->harga_paket }}</td>
+                                                        <td class="text-center">
+                                                            <a href="/transaksis/tambah_item/{{ $id }}/{{ $paket->id }}" class="badge badge-primary px-3">+</a>
+                                                        </td>
+                                                    </tr>
+                                                @empty
+                                                    <div class="alert alert-danger">
+                                                        Data Paket Belum Tersedia.
+                                                    </div>
+                                                @endforelse
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="profile">
                                     <div class="p-t-15">
-                                        <h4>This is profile title</h4>
-                                        <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.</p>
-                                        <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.</p>
+                                        <table class="table table-striped table-bordered zero-configuration">
+                                            <tbody>
+                                                @forelse ($menu as $menu)
+                                                    <tr>
+                                                        <td class="text-center">{{ $menu->nama_menu }}</td>
+                                                        <td class="text-center">{{ $menu->harga_menu }}</td>
+                                                        <td class="text-center">
+                                                            <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                                                action="{{ route('menus.destroy', $menu->id) }}" method="POST">
+                                                                <a href="{{ route('menus.edit', $menu->id) }}"
+                                                                    class="badge badge-primary px-2">EDIT</a>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                @empty
+                                                    <div class="alert alert-danger">
+                                                        Data Menu Belum Tersedia.
+                                                    </div>
+                                                @endforelse
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('nominal_jurnal');
             $table->integer('akun_id');
             $table->integer('transaksi_id');
-            $table->timestamps();
+            $table->timestamps(); 
         });
     }
 

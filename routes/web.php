@@ -28,7 +28,8 @@ Route::get('/dashboard', function () {
 
 Route::resource('/games',\App\Http\Controllers\GameController::class);
 Route::resource('/ruangans',\App\Http\Controllers\RuanganController::class); 
-Route::resource('/pakets',\App\Http\Controllers\PaketController::class); 
+Route::resource('/pakets',\App\Http\Contrpaketsollers\PaketController::class); 
+Route::resource('/menus',\App\Http\Controllers\MenuController::class); 
 Route::resource('/menus',\App\Http\Controllers\MenuController::class); 
 
 // Route::resource('/transaksis',\App\Http\Controllers\TransaksiController::class); 
@@ -39,3 +40,6 @@ Route::get('/transaksi/create', [TransaksiController::class, 'create']);
 Route::post('/transaksis/cek_nomor', [TransaksiController::class, 'cek_nomor']);
 Route::post('/transaksis/select_member', [TransaksiController::class, 'select_member']);
 Route::post('/transaksis/select_nonmember', [TransaksiController::class, 'select_nonmember']);
+Route::get('/transaksis/hapus_item/{id}/{id_item}', [TransaksiController::class, 'hapus_item']);
+Route::get('/transaksis/tambah_item/{id}/{id_item}', [TransaksiController::class, 'tambah_item']);
+Route::get('/transaksis/save_transaksi/{id}/{total}/{tgl}', [TransaksiController::class, 'save_transaksi']);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Jadwal;
 use App\Models\Jasa;
+use App\Models\Jurnal;
 use App\Models\Paket;
 use App\Models\Pelanggan;
 use App\Models\Pemesanan;
@@ -217,9 +218,139 @@ class TransaksiController extends Controller
 
     public function show(string $id)
     {
-        // return $id;
-        // $paket = Paket::findOrFail($id);
-        // return view('transaksi.show', compact('paket'));
-        return view('transaksi.show');
+        $transaksis = DB::table('transaksis')
+            ->join('ruangans', 'transaksis.ruangan_id', '=', 'ruangans.id')
+            ->join('pelanggans', 'transaksis.pelanggan_id', '=', 'pelanggans.id')
+            ->join('pemesanans', 'transaksis.pemesanan_id', '=', 'pemesanans.id')
+            ->select('transaksis.*', 'ruangans.*', 'pelanggans.*', 'pemesanans.*')
+            ->where('transaksis.id', '=', $id)
+            ->get();
+        
+            $item = DB::table('transaksis')
+            ->join('jasas', 'transaksis.id', '=', 'jasas.transaksi_id')
+            ->join('pakets', 'jasas.paket_id', '=', 'pakets.id')
+            ->select( DB::raw('SUM(jasas.jumlah) AS jumlah, jasas.paket_id, transaksis.id, pakets.nama_paket, pakets.harga_paket'))
+            ->where('transaksis.id', '=', $id)
+            ->groupBy('jasas.paket_id')
+            ->groupBy('transaksis.id')
+            ->groupBy('pakets.nama_paket')
+            ->groupBy('pakets.harga_paket')
+            ->get();
+
+            $paket = DB::table('pakets')
+            ->get();
+            
+            $menu = DB::table('menus')
+            ->get();
+            // return $item;
+            
+        return view('transaksi.show', compact('transaksis','item','paket','menu', 'id'));
+    }
+
+    public function hapus_item($id,$id_item)
+    {
+        DB::table('jasas')
+        ->where('paket_id', '=', $id_item)->take(1)->delete();
+
+        $transaksis = DB::table('transaksis')
+            ->join('ruangans', 'transaksis.ruangan_id', '=', 'ruangans.id')
+            ->join('pelanggans', 'transaksis.pelanggan_id', '=', 'pelanggans.id')
+            ->join('pemesanans', 'transaksis.pemesanan_id', '=', 'pemesanans.id')
+            ->select('transaksis.*', 'ruangans.*', 'pelanggans.*', 'pemesanans.*')
+            ->where('transaksis.id', '=', $id)
+            ->get();
+        
+            $item = DB::table('transaksis')
+            ->join('jasas', 'transaksis.id', '=', 'jasas.transaksi_id')
+            ->join('pakets', 'jasas.paket_id', '=', 'pakets.id')
+            ->select( DB::raw('SUM(jasas.jumlah) AS jumlah, jasas.paket_id, transaksis.id, pakets.nama_paket, pakets.harga_paket'))
+            ->where('transaksis.id', '=', $id)
+            ->groupBy('jasas.paket_id')
+            ->groupBy('transaksis.id')
+            ->groupBy('pakets.nama_paket')
+            ->groupBy('pakets.harga_paket')
+            ->get();
+
+            $paket = DB::table('pakets')
+            ->get();
+            
+            $menu = DB::table('menus')
+            ->get();
+            // return $item;
+            
+        return view('transaksi.show', compact('transaksis','item','paket','menu', 'id'));
+        // return redirect()->route('pakets.index')->with(['success' => 'Data Berhasil Dihapus']);
+    }
+
+    public function tambah_item($id,$id_item)
+    {
+        Jasa::create([
+            'jumlah'            => 1,
+            'paket_id'          => $id_item,
+            'transaksi_id'      => $id,
+        ]);
+
+        $transaksis = DB::table('transaksis')
+            ->join('ruangans', 'transaksis.ruangan_id', '=', 'ruangans.id')
+            ->join('pelanggans', 'transaksis.pelanggan_id', '=', 'pelanggans.id')
+            ->join('pemesanans', 'transaksis.pemesanan_id', '=', 'pemesanans.id')
+            ->select('transaksis.*', 'ruangans.*', 'pelanggans.*', 'pemesanans.*')
+            ->where('transaksis.id', '=', $id)
+            ->get();
+        
+            $item = DB::table('transaksis')
+            ->join('jasas', 'transaksis.id', '=', 'jasas.transaksi_id')
+            ->join('pakets', 'jasas.paket_id', '=', 'pakets.id')
+            ->select( DB::raw('SUM(jasas.jumlah) AS jumlah, jasas.paket_id, transaksis.id, pakets.nama_paket, pakets.harga_paket'))
+            ->where('transaksis.id', '=', $id)
+            ->groupBy('jasas.paket_id')
+            ->groupBy('transaksis.id')
+            ->groupBy('pakets.nama_paket')
+            ->groupBy('pakets.harga_paket')
+            ->get();
+
+            $paket = DB::table('pakets')
+            ->get();
+            
+            $menu = DB::table('menus')
+            ->get();
+            // return $item;
+            
+        return view('transaksi.show', compact('transaksis','item','paket','menu', 'id'));
+        // return redirect()->route('pakets.index')->with(['success' => 'Data Berhasil Dihapus']);
+    }
+    
+    public function save_transaksi($id,$total,$tgl)
+    {
+        $transaksi = Transaksi::findOrFail($id);
+
+        $transaksi->update([
+            'tot_jasa'  => $total,
+            'status_transaksi'  => "Selesai",
+        ]);
+
+        Jurnal::create([
+            'tgl_jurnal'     => $tgl,
+            'posisi_dk'      => "Debet",
+            'nominal_jurnal' => $total,
+            'akun_id'        => "1101",
+            'transaksi_id'   => $id,
+        ]);
+        
+        Jurnal::create([
+            'tgl_jurnal'     => $tgl,
+            'posisi_dk'      => "Kredit",
+            'nominal_jurnal' => $total,
+            'akun_id'        => "4101",
+            'transaksi_id'   => $id,
+        ]);
+            
+        $transaksis = DB::table('transaksis')
+            ->join('ruangans', 'transaksis.ruangan_id', '=', 'ruangans.id')
+            ->join('pelanggans', 'transaksis.pelanggan_id', '=', 'pelanggans.id')
+            ->select('transaksis.*', 'ruangans.nama_ruangan', 'pelanggans.nama_pelanggan')
+            ->get();
+
+        return view('transaksi.index', compact('transaksis'));
     }
 }

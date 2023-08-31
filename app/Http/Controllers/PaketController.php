@@ -67,4 +67,4 @@ class PaketController extends Controller
         $paket->delete();
         return redirect()->route('pakets.index')->with(['success' => 'Data Berhasil Dihapus']);
     }
-}
+} 
