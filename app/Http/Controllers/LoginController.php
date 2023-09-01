@@ -10,7 +10,8 @@ class LoginController extends Controller
 {
     public function index()
     {
-        return view("Login/index");
+        return redirect('/dashboard');
+        // return view("Login/index");
     }
 
     public function Login(Request $request)

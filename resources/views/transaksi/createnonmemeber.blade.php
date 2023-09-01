@@ -116,7 +116,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">JUMLAH JAM</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control @error('jumlah_jam') is-invalid @enderror"
@@ -130,7 +130,7 @@
                                         </div>
                                     @enderror
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
                             <button type="reset" class="btn btn-md btn-warning">RESET</button>

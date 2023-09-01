@@ -149,7 +149,7 @@
                             <i class="icon-graph menu-icon"></i> <span class="nav-text">Charts</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./chart-flot.html">Flot</a></li>
+                            <li><a href="/chart-flot.html">Flot</a></li>
                             <li><a href="./chart-morris.html">Morris</a></li>
                             <li><a href="./chart-chartjs.html">Chartjs</a></li>
                             <li><a href="./chart-chartist.html">Chartist</a></li>

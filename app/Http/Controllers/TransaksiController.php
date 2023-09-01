@@ -63,12 +63,23 @@ class TransaksiController extends Controller
     {
         $this->validate($request, [
             'jam_mulai' => 'required',
-            'jumlah_jam' => 'required|integer',
+            // 'jumlah_jam' => 'required|integer',
         ]);
         // $data_pelanggan = DB::table('pemesanans')->where('id', max('id'))->get();
         // $data_pemesanan = DB::select(DB::raw('select * from pemesanans where id = (select max(`id`) from pemesanans)'));
         $pemesanan_id = DB::table('pemesanans')->max('id');
         $transaksi_id = DB::table('transaksis')->max('id');
+
+        $jumlah_jam_paket = DB::table('pakets')
+            ->select('jumlah_jam')
+            ->where('id', '=', $request->id_paket)
+            ->get('array');
+
+        // dd($jumlah_jam_paket);
+        foreach ($jumlah_jam_paket as $jmh_jam) {
+           $jam_paket = $jmh_jam->jumlah_jam;
+        }
+
         // return $pemesanan_id+1;
         // return $request->jam_mulai;
 
@@ -76,7 +87,7 @@ class TransaksiController extends Controller
             'id'                => $pemesanan_id + 1,
             'tgl_pemesanan'     => $request->tgl_transaksi,
             'jam_mulai'         => $request->jam_mulai,
-            'jumlah_jam'        => $request->jumlah_jam,
+            'jumlah_jam'        => $jam_paket,
             'keterangan'        => "-",
             'status_pemesanan'  => "Pesan Ditempat",
             'ruangan_id'        => $request->id_ruangan,
@@ -139,12 +150,23 @@ class TransaksiController extends Controller
     {
         $this->validate($request, [
             'jam_mulai' => 'required',
-            'jumlah_jam' => 'required|integer',
+            // 'jumlah_jam' => 'required|integer',
         ]);
         // $data_pelanggan = DB::table('pemesanans')->where('id', max('id'))->get();
         // $data_pemesanan = DB::select(DB::raw('select * from pemesanans where id = (select max(`id`) from pemesanans)'));
         $pemesanan_id = DB::table('pemesanans')->max('id');
         $transaksi_id = DB::table('transaksis')->max('id');
+
+        $jumlah_jam_paket = DB::table('pakets')
+            ->select('jumlah_jam')
+            ->where('id', '=', $request->id_paket)
+            ->get('array');
+
+        // dd($jumlah_jam_paket);
+        foreach ($jumlah_jam_paket as $jmh_jam) {
+           $jam_paket = $jmh_jam->jumlah_jam;
+        }
+
         // return $pemesanan_id+1;
         // return $request->jam_mulai;
 
@@ -158,7 +180,7 @@ class TransaksiController extends Controller
             'id'                => $pemesanan_id + 1,
             'tgl_pemesanan'     => $request->tgl_transaksi,
             'jam_mulai'         => $request->jam_mulai,
-            'jumlah_jam'        => $request->jumlah_jam,
+            'jumlah_jam'        => $jam_paket,
             'keterangan'        => "-",
             'status_pemesanan'  => "Pesan Ditempat",
             'ruangan_id'        => $request->id_ruangan,
