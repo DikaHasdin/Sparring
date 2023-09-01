@@ -146,6 +146,30 @@
 
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-notebook menu-icon"></i><span class="nav-text">Pages</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="/laporan/jurnal_umum">Jurnal Umum</a></li>
+                            <li><a href="./page-register.html">Buku Besar</a></li>
+                            <li><a href="./page-lock.html">Neraca Saldo</a></li>
+                            <li><a href="./page-lock.html">Jurnal Penyesuain</a></li>
+                            <li><a href="./page-lock.html">Neraca Saldo Penyesuain</a></li>
+                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Laporan Keuangan</a>
+                                <ul aria-expanded="false">
+                                    <li><a href="./page-error-404.html">Laba Rugi</a></li>
+                                    <li><a href="./page-error-403.html">Arus Kas</a></li>
+                                    <li><a href="./page-error-400.html">Perubahan Modal</a></li>
+                                    <li><a href="./page-error-500.html">Neraca</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./page-login.html">Jurnal Penutup</a></li>
+                            <li><a href="./page-login.html">Neraca Saldo Penutup</a></li>
+                            <li><a href="./page-login.html">Jurnal Pembalik</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-graph menu-icon"></i> <span class="nav-text">Charts</span>
                         </a>
                         <ul aria-expanded="false">

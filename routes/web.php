@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TransaksiController;
 use Illuminate\Support\Facades\Route;
@@ -43,3 +44,5 @@ Route::post('/transaksis/select_nonmember', [TransaksiController::class, 'select
 Route::get('/transaksis/hapus_item/{id}/{id_item}', [TransaksiController::class, 'hapus_item']);
 Route::get('/transaksis/tambah_item/{id}/{id_item}', [TransaksiController::class, 'tambah_item']);
 Route::get('/transaksis/save_transaksi/{id}/{total}/{tgl}', [TransaksiController::class, 'save_transaksi']);
+
+Route::get('/laporan/jurnal_umum', [LaporanController::class, 'jurnal_umum']);
