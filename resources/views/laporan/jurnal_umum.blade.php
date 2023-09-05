@@ -35,7 +35,7 @@
                                             <td class="text-center">{{ $jurnal_umum->tgl_jurnal }}</td>
                                             <td>{{ $jurnal_umum->akun_id }}</td>
                                             <td class="text-center">{{ $jurnal_umum->akun_id }}</td>
-                                            <td>{{ $jurnal_umum->nominal_jurnal }}</td>
+                                            <td class="text-right">{{ $jurnal_umum->nominal_jurnal }}</td>
                                             <td></td>
                                         </tr>
                                         <?php }
@@ -46,7 +46,7 @@
                                             <td class="text-center">{{ $jurnal_umum->akun_id }}</td>
                                             <td class="text-center">{{ $jurnal_umum->akun_id }}</td>
                                             <td></td>
-                                            <td>{{ $jurnal_umum->nominal_jurnal }}</td>
+                                            <td class="text-right">{{ $jurnal_umum->nominal_jurnal }}</td>
                                         </tr>
                                         <?php }
                                          ?>

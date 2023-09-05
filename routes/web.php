@@ -22,10 +22,11 @@ Route::resource('/',\App\Http\Controllers\LoginController::class);
 Route::post('/login', [LoginController::class, 'Login']);
 Route::get('/logout', [LoginController::class, 'Logout']);
 Route::get('/Register', [LoginController::class, 'Register']);
+Route::get('/dashboard', [LoginController::class, 'dashboard']);
 
-Route::get('/dashboard', function () {
-    return view('welcome');
-});
+// Route::get('/dashboard', function () {
+//     return view('welcome');
+// });
 
 Route::resource('/games',\App\Http\Controllers\GameController::class);
 Route::resource('/ruangans',\App\Http\Controllers\RuanganController::class); 
