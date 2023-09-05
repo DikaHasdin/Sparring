@@ -44,6 +44,8 @@ Route::post('/transaksi/select_member', [TransaksiController::class, 'select_mem
 Route::post('/transaksis/select_nonmember', [TransaksiController::class, 'select_nonmember']);
 Route::get('/transaksis/hapus_item/{id}/{id_item}', [TransaksiController::class, 'hapus_item']);
 Route::get('/transaksis/tambah_item/{id}/{id_item}', [TransaksiController::class, 'tambah_item']);
-Route::get('/transaksis/save_transaksi/{id}/{total}/{tgl}', [TransaksiController::class, 'save_transaksi']);
+Route::get('/transaksis/hapus_menu/{id}/{id_menu}', [TransaksiController::class, 'hapus_menu']);
+Route::get('/transaksis/tambah_menu/{id}/{id_menu}', [TransaksiController::class, 'tambah_menu']);
+Route::get('/transaksis/save_transaksi/{id}/{total_paket}/{total_menu}/{total_hpp}/{tgl}', [TransaksiController::class, 'save_transaksi']);
 
 Route::get('/laporan/jurnal_umum', [LaporanController::class, 'jurnal_umum']);

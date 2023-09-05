@@ -48,7 +48,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $total=0; ?>
+                                    <?php 
+                                        $total=0; 
+                                        $total_paket=0; 
+                                        $total_menu=0;
+                                        $total_hpp=0; ?>
                                     @foreach ($item as $item)
                                         <tr>
                                             <td class="text-center">{{ $item->nama_paket }}</td>
@@ -56,9 +60,34 @@
                                             <td class="text-center">{{ $item->harga_paket }}</td>
                                             <td class="text-center">{{ $item->jumlah * $item->harga_paket }}</td>
                                             <?php $total=$total+($item->jumlah * $item->harga_paket) ?>
+                                            <?php $total_paket=$total_paket+($item->jumlah * $item->harga_paket) ?>
                                             <td class="text-center">
                                                 <form onsubmit="return confirm('Apakah Anda Yakin ?');"
                                                     action="/transaksis/hapus_item/{{ $id }}/{{ $item->paket_id }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="badge badge-danger px-2">HAPUS</button>
+                                                    <a href=""></a>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        {{-- @empty
+                                        <div class="alert alert-danger">
+                                            Data transaksi Belum Tersedia.
+                                        </div> --}}
+                                    @endforeach
+                                    @foreach ($item_menu as $item_menu)
+                                        <tr>
+                                            <td class="text-center">{{ $item_menu->nama_menu }}</td>
+                                            <td class="text-center">{{ $item_menu->jumlah }}</td>
+                                            <td class="text-center">{{ $item_menu->harga_menu }}</td>
+                                            <td class="text-center">{{ $item_menu->jumlah * $item_menu->harga_menu }}</td>
+                                            <?php $total=$total+($item_menu->jumlah * $item_menu->harga_menu) ?>
+                                            <?php $total_menu=$total_menu+($item_menu->jumlah * $item_menu->harga_menu) ?>
+                                            <?php $total_hpp=$total_hpp+($item_menu->jumlah * $item_menu->hpp) ?>
+                                            <td class="text-center">
+                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                                    action="/transaksis/hapus_menu/{{ $id }}/{{ $item_menu->menu_id }}">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="badge badge-danger px-2">HAPUS</button>
@@ -75,7 +104,7 @@
                                         <td class="text-center" colspan="3">TOTAL</td>
                                         <td class="text-center">{{ $total }}</td>
                                         <td class="text-center">
-                                            <a href="/transaksis/save_transaksi/{{ $id }}/{{ $total }}/{{ $transaksi->tgl_transaksi }}" class="badge badge-primary px-3">SAVE</a>
+                                            <a href="/transaksis/save_transaksi/{{ $id }}/{{ $total_paket }}/{{ $total_menu }}/{{ $total_hpp }}/{{ $transaksi->tgl_transaksi }}" class="badge badge-primary px-3">SAVE</a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -127,11 +156,7 @@
                                                         <td class="text-center">{{ $menu->nama_menu }}</td>
                                                         <td class="text-center">{{ $menu->harga_menu }}</td>
                                                         <td class="text-center">
-                                                            <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                                                action="{{ route('menus.destroy', $menu->id) }}" method="POST">
-                                                                <a href="{{ route('menus.edit', $menu->id) }}"
-                                                                    class="badge badge-primary px-2">EDIT</a>
-                                                            </form>
+                                                            <a href="/transaksis/tambah_menu/{{ $id }}/{{ $menu->id }}" class="badge badge-primary px-3">+</a>
                                                         </td>
                                                     </tr>
                                                 @empty

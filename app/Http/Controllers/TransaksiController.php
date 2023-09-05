@@ -8,6 +8,7 @@ use App\Models\Jurnal;
 use App\Models\Paket;
 use App\Models\Pelanggan;
 use App\Models\Pemesanan;
+use App\Models\Penjualan;
 use App\Models\Ruangan;
 use App\Models\Transaksi;
 use Illuminate\View\View;
@@ -258,6 +259,19 @@ class TransaksiController extends Controller
             ->groupBy('pakets.nama_paket')
             ->groupBy('pakets.harga_paket')
             ->get();
+            
+            $item_menu = DB::table('transaksis')
+            ->join('penjualans', 'transaksis.id', '=', 'penjualans.transaksi_id')
+            ->join('menus', 'penjualans.menu_id', '=', 'menus.id')
+            ->join('barangs', 'menus.barang_id', '=', 'barangs.id')
+            ->select( DB::raw('SUM(penjualans.jumlah) AS jumlah, penjualans.menu_id, transaksis.id, menus.nama_menu, menus.harga_menu, barangs.hpp'))
+            ->where('transaksis.id', '=', $id)
+            ->groupBy('penjualans.menu_id')
+            ->groupBy('transaksis.id')
+            ->groupBy('menus.nama_menu')
+            ->groupBy('menus.harga_menu')
+            ->groupBy('barangs.hpp')
+            ->get();
 
             $paket = DB::table('pakets')
             ->get();
@@ -266,7 +280,7 @@ class TransaksiController extends Controller
             ->get();
             // return $item;
             
-        return view('transaksi.show', compact('transaksis','item','paket','menu', 'id'));
+        return view('transaksi.show', compact('transaksis','item','item_menu','paket','menu', 'id'));
     }
 
     public function hapus_item($id,$id_item)
@@ -293,6 +307,17 @@ class TransaksiController extends Controller
             ->groupBy('pakets.harga_paket')
             ->get();
 
+            $item_menu = DB::table('transaksis')
+            ->join('penjualans', 'transaksis.id', '=', 'penjualans.transaksi_id')
+            ->join('menus', 'penjualans.menu_id', '=', 'menus.id')
+            ->select( DB::raw('SUM(penjualans.jumlah) AS jumlah, penjualans.menu_id, transaksis.id, menus.nama_menu, menus.harga_menu'))
+            ->where('transaksis.id', '=', $id)
+            ->groupBy('penjualans.menu_id')
+            ->groupBy('transaksis.id')
+            ->groupBy('menus.nama_menu')
+            ->groupBy('menus.harga_menu')
+            ->get();
+
             $paket = DB::table('pakets')
             ->get();
             
@@ -300,7 +325,53 @@ class TransaksiController extends Controller
             ->get();
             // return $item;
             
-        return view('transaksi.show', compact('transaksis','item','paket','menu', 'id'));
+        return view('transaksi.show', compact('transaksis','item','item_menu','paket','menu', 'id'));
+        // return redirect()->route('pakets.index')->with(['success' => 'Data Berhasil Dihapus']);
+    }
+    
+    public function hapus_menu($id,$id_menu)
+    {
+        DB::table('penjualans')
+        ->where('menu_id', '=', $id_menu)->take(1)->delete();
+
+        $transaksis = DB::table('transaksis')
+            ->join('ruangans', 'transaksis.ruangan_id', '=', 'ruangans.id')
+            ->join('pelanggans', 'transaksis.pelanggan_id', '=', 'pelanggans.id')
+            ->join('pemesanans', 'transaksis.pemesanan_id', '=', 'pemesanans.id')
+            ->select('transaksis.*', 'ruangans.*', 'pelanggans.*', 'pemesanans.*')
+            ->where('transaksis.id', '=', $id)
+            ->get();
+        
+            $item = DB::table('transaksis')
+            ->join('jasas', 'transaksis.id', '=', 'jasas.transaksi_id')
+            ->join('pakets', 'jasas.paket_id', '=', 'pakets.id')
+            ->select( DB::raw('SUM(jasas.jumlah) AS jumlah, jasas.paket_id, transaksis.id, pakets.nama_paket, pakets.harga_paket'))
+            ->where('transaksis.id', '=', $id)
+            ->groupBy('jasas.paket_id')
+            ->groupBy('transaksis.id')
+            ->groupBy('pakets.nama_paket')
+            ->groupBy('pakets.harga_paket')
+            ->get();
+
+            $item_menu = DB::table('transaksis')
+            ->join('penjualans', 'transaksis.id', '=', 'penjualans.transaksi_id')
+            ->join('menus', 'penjualans.menu_id', '=', 'menus.id')
+            ->select( DB::raw('SUM(penjualans.jumlah) AS jumlah, penjualans.menu_id, transaksis.id, menus.nama_menu, menus.harga_menu'))
+            ->where('transaksis.id', '=', $id)
+            ->groupBy('penjualans.menu_id')
+            ->groupBy('transaksis.id')
+            ->groupBy('menus.nama_menu')
+            ->groupBy('menus.harga_menu')
+            ->get();
+
+            $paket = DB::table('pakets')
+            ->get();
+            
+            $menu = DB::table('menus')
+            ->get();
+            // return $item;
+            
+        return view('transaksi.show', compact('transaksis','item','item_menu','paket','menu', 'id'));
         // return redirect()->route('pakets.index')->with(['success' => 'Data Berhasil Dihapus']);
     }
 
@@ -331,6 +402,17 @@ class TransaksiController extends Controller
             ->groupBy('pakets.harga_paket')
             ->get();
 
+            $item_menu = DB::table('transaksis')
+            ->join('penjualans', 'transaksis.id', '=', 'penjualans.transaksi_id')
+            ->join('menus', 'penjualans.menu_id', '=', 'menus.id')
+            ->select( DB::raw('SUM(penjualans.jumlah) AS jumlah, penjualans.menu_id, transaksis.id, menus.nama_menu, menus.harga_menu'))
+            ->where('transaksis.id', '=', $id)
+            ->groupBy('penjualans.menu_id')
+            ->groupBy('transaksis.id')
+            ->groupBy('menus.nama_menu')
+            ->groupBy('menus.harga_menu')
+            ->get();
+
             $paket = DB::table('pakets')
             ->get();
             
@@ -338,23 +420,73 @@ class TransaksiController extends Controller
             ->get();
             // return $item;
             
-        return view('transaksi.show', compact('transaksis','item','paket','menu', 'id'));
+        return view('transaksi.show', compact('transaksis','item','item_menu','paket','menu', 'id'));
         // return redirect()->route('pakets.index')->with(['success' => 'Data Berhasil Dihapus']);
     }
     
-    public function save_transaksi($id,$total,$tgl)
+    public function tambah_menu($id,$id_menu)
+    {
+        Penjualan::create([
+            'jumlah'            => 1,
+            'menu_id'          => $id_menu,
+            'transaksi_id'      => $id,
+        ]);
+
+        $transaksis = DB::table('transaksis')
+            ->join('ruangans', 'transaksis.ruangan_id', '=', 'ruangans.id')
+            ->join('pelanggans', 'transaksis.pelanggan_id', '=', 'pelanggans.id')
+            ->join('pemesanans', 'transaksis.pemesanan_id', '=', 'pemesanans.id')
+            ->select('transaksis.*', 'ruangans.*', 'pelanggans.*', 'pemesanans.*')
+            ->where('transaksis.id', '=', $id)
+            ->get();
+        
+            $item = DB::table('transaksis')
+            ->join('jasas', 'transaksis.id', '=', 'jasas.transaksi_id')
+            ->join('pakets', 'jasas.paket_id', '=', 'pakets.id')
+            ->select( DB::raw('SUM(jasas.jumlah) AS jumlah, jasas.paket_id, transaksis.id, pakets.nama_paket, pakets.harga_paket'))
+            ->where('transaksis.id', '=', $id)
+            ->groupBy('jasas.paket_id')
+            ->groupBy('transaksis.id')
+            ->groupBy('pakets.nama_paket')
+            ->groupBy('pakets.harga_paket')
+            ->get();
+
+            $item_menu = DB::table('transaksis')
+            ->join('penjualans', 'transaksis.id', '=', 'penjualans.transaksi_id')
+            ->join('menus', 'penjualans.menu_id', '=', 'menus.id')
+            ->select( DB::raw('SUM(penjualans.jumlah) AS jumlah, penjualans.menu_id, transaksis.id, menus.nama_menu, menus.harga_menu'))
+            ->where('transaksis.id', '=', $id)
+            ->groupBy('penjualans.menu_id')
+            ->groupBy('transaksis.id')
+            ->groupBy('menus.nama_menu')
+            ->groupBy('menus.harga_menu')
+            ->get();
+
+            $paket = DB::table('pakets')
+            ->get();
+            
+            $menu = DB::table('menus')
+            ->get();
+            // return $item;
+            
+        return view('transaksi.show', compact('transaksis','item','item_menu','paket','menu', 'id'));
+        // return redirect()->route('pakets.index')->with(['success' => 'Data Berhasil Dihapus']);
+    }
+    
+    public function save_transaksi($id,$total_paket,$total_menu,$total_hpp,$tgl)
     {
         $transaksi = Transaksi::findOrFail($id);
 
         $transaksi->update([
-            'tot_jasa'  => $total,
+            'tot_jasa'          => $total_paket,
+            'tot_penjualan'     => $total_menu,
             'status_transaksi'  => "Selesai",
         ]);
 
         Jurnal::create([
             'tgl_jurnal'     => $tgl,
             'posisi_dk'      => "Debet",
-            'nominal_jurnal' => $total,
+            'nominal_jurnal' => $total_paket,
             'akun_id'        => "1101",
             'transaksi_id'   => $id,
         ]);
@@ -362,8 +494,40 @@ class TransaksiController extends Controller
         Jurnal::create([
             'tgl_jurnal'     => $tgl,
             'posisi_dk'      => "Kredit",
-            'nominal_jurnal' => $total,
+            'nominal_jurnal' => $total_paket,
             'akun_id'        => "4101",
+            'transaksi_id'   => $id,
+        ]);
+        
+        Jurnal::create([
+            'tgl_jurnal'     => $tgl,
+            'posisi_dk'      => "Debet",
+            'nominal_jurnal' => $total_menu,
+            'akun_id'        => "1101",
+            'transaksi_id'   => $id,
+        ]);
+        
+        Jurnal::create([
+            'tgl_jurnal'     => $tgl,
+            'posisi_dk'      => "Kredit",
+            'nominal_jurnal' => $total_menu,
+            'akun_id'        => "4102",
+            'transaksi_id'   => $id,
+        ]);
+        
+        Jurnal::create([
+            'tgl_jurnal'     => $tgl,
+            'posisi_dk'      => "Debet",
+            'nominal_jurnal' => $total_hpp,
+            'akun_id'        => "4103",
+            'transaksi_id'   => $id,
+        ]);
+        
+        Jurnal::create([
+            'tgl_jurnal'     => $tgl,
+            'posisi_dk'      => "Kredit",
+            'nominal_jurnal' => $total_hpp,
+            'akun_id'        => "1108",
             'transaksi_id'   => $id,
         ]);
             

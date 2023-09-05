@@ -10,7 +10,7 @@ class LaporanController extends Controller
 {
     public function jurnal_umum(): View
     {  
-        $jurnal_umum = Jurnal::latest()->paginate(5);
+        $jurnal_umum = Jurnal::first()->paginate();
         return view('laporan.jurnal_umum', compact('jurnal_umum'));
     }
 }
